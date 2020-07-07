@@ -9,19 +9,12 @@ router.use(session({secret: 'Its a secret'}));
 router.use(cookieParser());
 router.use(bodyParser());
 
-router.post('/login', (req, res) => {
-	if(req.body.name && req.body.password) {
-		var token = jwt.sign({name: req.body.name}, 'shhhhh');
-		res.json(token);
-	} else {
-		res.json({auth: false});
-	}
-});
+const controller = require('../controllers/auth');
 
-router.post('/register', (req, res) => {
-	if(req.body.email && req.body.name && req.body.password) {
-		
-	}
-})
+router.post('/login', controller.login);
+
+router.post('/register', controller.register);
+
+router.get('/user/:id', controller.user)
 
 module.exports = router;

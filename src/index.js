@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+
 
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
+
+app.use(express.static('./img'));
+app.use(cors());
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/post', postRouter);
